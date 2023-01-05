@@ -49,6 +49,8 @@ public class ProgramBackdoorController {
                 "'TEMPLE', ?, ?)", now.minusDays(1).plusHours(2), now.minusDays(1).plusHours(2)
         );
 
+        // TODO: 다른 카테고리들도 추가 필요
+
         //    FARM
 
 
