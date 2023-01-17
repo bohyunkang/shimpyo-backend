@@ -1,4 +1,4 @@
-package kr.bohyunkang.shimpyo.models;
+package kr.bohyunkang.shimpyo.models.valueobjects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -28,9 +28,17 @@ public class Title {
 
     @Override
     public boolean equals(Object other) {
-        return other != null
-                && other.getClass() == Title.class
-                && value.equals(((Title) other).value);
+        if (this == other) {
+            return true;
+        }
+
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+
+        Title otherTitle = (Title) other;
+
+        return Objects.equals(value, otherTitle.value);
     }
 
     @Override

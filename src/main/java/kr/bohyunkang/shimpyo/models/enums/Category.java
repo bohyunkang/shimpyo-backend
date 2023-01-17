@@ -1,4 +1,4 @@
-package kr.bohyunkang.shimpyo.models;
+package kr.bohyunkang.shimpyo.models.enums;
 
 import java.util.Collections;
 import java.util.Map;
