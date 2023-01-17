@@ -13,9 +13,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-class ProgramBackdoorControllerTest {
+class BackdoorControllerTest {
     @Autowired
     private MockMvc mockMvc;
+
+    @Test
+    void resetDatabase() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/backdoor/reset-database"))
+                .andExpect(status().isOk());
+    }
 
     @Test
     void setupProgram() throws Exception {
