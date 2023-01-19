@@ -1,4 +1,4 @@
-package kr.bohyunkang.shimpyo.models;
+package kr.bohyunkang.shimpyo.models.valueobjects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -16,7 +16,7 @@ public class Address {
     public Address(String value) {
         this.value = value;
     }
-    
+
     public String value() {
         return value;
     }
@@ -28,9 +28,17 @@ public class Address {
 
     @Override
     public boolean equals(Object other) {
-        return other != null
-                && other.getClass() == Address.class
-                && value.equals(((Address) other).value);
+        if (this == other) {
+            return true;
+        }
+
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+
+        Address otherAddress = (Address) other;
+
+        return Objects.equals(value, otherAddress.value);
     }
 
     @Override

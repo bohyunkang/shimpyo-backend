@@ -1,4 +1,4 @@
-package kr.bohyunkang.shimpyo.models;
+package kr.bohyunkang.shimpyo.models.valueobjects;
 
 import org.junit.jupiter.api.Test;
 
