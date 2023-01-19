@@ -2,21 +2,13 @@ package kr.bohyunkang.shimpyo.dtos;
 
 public class PlaceDto {
     private Long id;
-
     private String name;
-
     private String address;
-
     private String phoneNumber;
-
     private boolean pickUp;
-
     private String description;
-
     private String checkInStart;
-
     private String checkInEnd;
-
     private String checkOut;
 
     public PlaceDto() {
