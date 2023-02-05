@@ -34,3 +34,6 @@ build
 
 # Ignore H2 database output directory
 data
+
+# Ignore properties file
+**/application.properties
