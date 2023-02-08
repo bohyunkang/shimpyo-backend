@@ -1,6 +1,7 @@
 package kr.bohyunkang.shimpyo.backdoors;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +14,11 @@ import java.time.LocalDateTime;
 @Transactional
 public class BackdoorController {
     private JdbcTemplate jdbcTemplate;
+    private PasswordEncoder passwordEncoder;
 
-    public BackdoorController(JdbcTemplate jdbcTemplate) {
+    public BackdoorController(JdbcTemplate jdbcTemplate, PasswordEncoder passwordEncoder) {
         this.jdbcTemplate = jdbcTemplate;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/reset-database")
@@ -25,7 +28,26 @@ public class BackdoorController {
         jdbcTemplate.execute("DELETE FROM program");
         jdbcTemplate.execute("DELETE FROM place");
 
-        return "Reset programs completed!";
+        jdbcTemplate.execute("DELETE FROM USERS");
+
+        return "Reset database completed!";
+    }
+
+    @GetMapping("/setup-user")
+    public String setupUser() {
+        LocalDateTime now = LocalDateTime.now();
+
+        jdbcTemplate.execute("DELETE FROM USERS");
+
+        jdbcTemplate.update("" +
+                        "INSERT INTO users(id, email, encoded_password, " +
+                        "name, nickname, created_at, updated_at) " +
+                        "VALUES(1, ?, ?, ?, ?, ?, ?)",
+                "healing@shimpyo.com", passwordEncoder.encode("Healing1234!"),
+                "강힐링", "힐링이필요해", now, now
+        );
+
+        return "Insert users completed!";
     }
 
     @GetMapping("/setup-program")
